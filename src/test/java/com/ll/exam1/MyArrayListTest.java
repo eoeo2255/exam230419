@@ -133,4 +133,17 @@ class MyArrayListTest {
         assertThat(e0).isEqualTo(true);
         assertThat(e1).isEqualTo(false);
     }
+
+    @Test
+    @DisplayName("remove(1)")  // String 뿐만 아니라 Boolean 타입의 값도 반환할 수 있음
+    void t09() {
+        MyArrayList<String> list = new MyArrayList<>();
+
+        list.add("방울");
+        list.add("토마토");
+        assertThat(list.size()).isEqualTo(2);
+
+        list.remove(1);
+        assertThat(list.size()).isEqualTo(1);
+    }
 }

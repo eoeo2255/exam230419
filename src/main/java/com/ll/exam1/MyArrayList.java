@@ -56,4 +56,8 @@ public class MyArrayList<T> {                   //모든 타입의 리스트를 
         }
         return -1;
     }
+
+    public void remove(int i) {
+        size--;
+    }
 }
