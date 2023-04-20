@@ -2,7 +2,9 @@ package com.ll.exam2;
 
 public class MyHashMap<K, V> {
     private int size = 0;
-    private final Entry[] entries; // Entry 는 key 와 value 로 구성되어 있음
+    private Entry[] entries; // Entry 는 key 와 value 로 구성되어 있음
+
+
 
     private static class Entry<K, V> {
         K key;
@@ -26,10 +28,39 @@ public class MyHashMap<K, V> {
     }
 
     public V put(K key, V value) {  // map >> put을 했을 때 덮어쓰기가 되면 덮어씌워지기 이전 값을 반환한다.
+        int indexOfKey = indexOfKey(key);
+
+        if (indexOfKey != -1) {
+            V old = (V) entries[indexOfKey].value;
+            entries[indexOfKey].value = value;
+            return old;
+        }
+
+        isSpaceEnough();
         entries[size] = new Entry<>(key, value);
 
         size++;
         return null;
+    }
+
+    private void isSpaceEnough() {
+        if (isNotEnough()) {
+            makeNewArray();
+        }
+    }
+
+    private void makeNewArray() {
+        Entry[] newEntries = new Entry[entries.length * 2];
+
+        for (int i = 0; i < entries.length; i++) {
+            newEntries[i] = entries[i];
+        }
+
+        entries = newEntries;
+    }
+
+    private boolean isNotEnough() {
+        return size >= entries.length;
     }
 
     public V get(K key) {
@@ -48,4 +79,23 @@ public class MyHashMap<K, V> {
         }
         return -1;
     }
+
+    public V remove(K key) {
+        int index = indexOfKey(key);
+
+        if (index == -1) {
+            return null;
+        }
+        V old = (V) entries[index].value;
+
+        for (int i = index + 1; i < size; i++) {
+            entries[i -1] = entries[i];
+        }
+
+        size--;
+        return old;
+    }
+
+
+
 }

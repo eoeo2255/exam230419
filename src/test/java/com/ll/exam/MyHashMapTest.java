@@ -37,10 +37,56 @@ public class MyHashMapTest {
 
         int ageOf철수 = map.get("철수");
         int ageOf영희 = map.get("영희");
+
+        assertThat(ageOf철수).isEqualTo(24);
+        assertThat(ageOf영희).isEqualTo(17);
+    }
+
+    @Test
+    @DisplayName("배열 자동 증가")
+    void t04() {
+        MyHashMap<String, Integer> map = new MyHashMap<>();
+
+        map.put("철수", 24);
+        map.put("영희", 17);
+        map.put("울트론", 183118797);
+
+        int ageOf철수 = map.get("철수");
+        int ageOf영희 = map.get("영희");
         int ageOf울트론 = map.get("울트론");
 
         assertThat(ageOf철수).isEqualTo(24);
         assertThat(ageOf영희).isEqualTo(17);
         assertThat(ageOf울트론).isEqualTo(183118797);
     }
+
+    @Test
+    @DisplayName("put, replace")
+    void t05() {
+        MyHashMap<String, Integer> map = new MyHashMap<>();
+
+        map.put("철수", 22);
+        map.put("영희", 23);
+
+        assertThat(
+                map.put("영희", 24)
+        ).isEqualTo(23);
+
+        assertThat(map.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("remove()")
+    void t06() {
+        MyHashMap<String, Integer> map = new MyHashMap<>();
+
+        map.put("철수", 22);
+        map.put("영희", 23);
+        map.put("울트론", 183118797);
+
+        assertThat(map.remove("울트론")).isEqualTo(183118797);
+        assertThat(map.remove("영숙")).isEqualTo(null);
+    }
+
+
 }
