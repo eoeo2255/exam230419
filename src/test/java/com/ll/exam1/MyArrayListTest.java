@@ -70,9 +70,9 @@ class MyArrayListTest {
     @Test
     @DisplayName("배열의 크기 자동 증가")
     void t04() {
-        MyArrayList<String> list = new MyArrayList<>();
+        MyArrayList<Object> list = new MyArrayList<>();
 
-        int dataLength1 = ((String[]) TestUt.getFieldValue(list, "data", null)).length;
+        int dataLength1 = ((Object[]) TestUt.getFieldValue(list, "data", null)).length;
 
         // 딱 1번 넘칠만큼의 데이터를 넣는다.
         IntStream.range(0, dataLength1 + 1)
@@ -85,9 +85,9 @@ class MyArrayListTest {
     @Test
     @DisplayName("MyArrayList 초기화 시 생성자 인자로 배열의 사이즈 지정")
     void t05() {
-        MyArrayList<String> list = new MyArrayList<>(200);
+        MyArrayList<Object> list = new MyArrayList<>(200);
 
-        int dataLength = ((String[]) TestUt.getFieldValue(list, "data",null)).length;
+        int dataLength = ((Object[]) TestUt.getFieldValue(list, "data",null)).length;
 
         assertThat(dataLength).isEqualTo(200);
     }
@@ -105,5 +105,16 @@ class MyArrayListTest {
         assertThat(list.indexOf("사과 5")).isEqualTo(5);
         assertThat(list.indexOf("사과 99")).isEqualTo(99);
         assertThat(list.indexOf("사과 100")).isEqualTo(-1);
+    }
+
+    @Test
+    @DisplayName("add(true)")
+    void t07() {
+        MyArrayList<Boolean> list = new MyArrayList<>(200);
+
+        list.add(true);
+        list.add(false);
+
+        assertThat(list.size()).isEqualTo(2);
     }
 }
