@@ -57,9 +57,15 @@ public class MyArrayList<T> {                   //모든 타입의 리스트를 
         return -1;
     }
 
-    public void remove(int i) {
-        data[i] = null;
+    public T remove(int index) {
+        T old = (T) data[index];
+
+        for (int i = index + 1; i < size; i++) {
+            data[i -1] = data[i];
+        }
+
         size--;
+        return old;
     }
 
     public boolean contains(T element) {
@@ -80,5 +86,13 @@ public class MyArrayList<T> {                   //모든 타입의 리스트를 
         for (int i = size - 1; i >= index; i--) {
             data[i + 1] = data[i];
         }
+    }
+
+    public T set(int index, T element) {
+        T old = (T) data[index];
+
+        data[index] = element;
+
+        return old;
     }
 }

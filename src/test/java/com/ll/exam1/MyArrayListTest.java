@@ -135,35 +135,20 @@ class MyArrayListTest {
     }
 
     @Test
-    @DisplayName("remove(1)")
+    @DisplayName("remove()")
     void t09() {
         MyArrayList<String> list = new MyArrayList<>();
+        list.add("Element1");
+        list.add("Element2");
+        list.add("Element3");
 
-        list.add("방울");
-        list.add("토마토");
+        assertThat(list.remove(0)).isEqualTo("Element1");
         assertThat(list.size()).isEqualTo(2);
-
-        list.remove(1);
-        assertThat(list.size()).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("remove(0)")
-    void t10() {
-        MyArrayList<String> list = new MyArrayList<>();
-
-        list.add("방울");
-        list.add("토마토");
-
-        list.remove(0);
-
-        String str = list.get(0);
-        assertThat(str).isEqualTo(null);
     }
 
     @Test
     @DisplayName("contains()")
-    void t11() {
+    void t10() {
         MyArrayList<String > list = new MyArrayList<>();
 
         IntStream.range(0,2)
@@ -176,7 +161,7 @@ class MyArrayListTest {
 
     @Test
     @DisplayName("addAt()")
-    void t12() {
+    void t11() {
         MyArrayList<String > list = new MyArrayList<>();
 
         list.add("방울");
@@ -189,5 +174,19 @@ class MyArrayListTest {
         assertThat(list.get(2)).isEqualTo("토마토");
     }
 
+    @Test
+    @DisplayName("set")
+    void t12() {
+        MyArrayList<String> list = new MyArrayList<>();
+        list.add("Element1"); // 0
+        list.add("Element2"); // 1
+        list.add("Element3"); // 2
 
+        assertThat(list.set(0, "Element4")).isEqualTo("Element1");
+        assertThat(list.size()).isEqualTo(3);
+
+        assertThat(list.get(0)).isEqualTo("Element4");
+        assertThat(list.get(1)).isEqualTo("Element2");
+        assertThat(list.get(2)).isEqualTo("Element3");
+    }
 }
