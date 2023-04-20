@@ -135,7 +135,7 @@ class MyArrayListTest {
     }
 
     @Test
-    @DisplayName("remove(1)")  // String 뿐만 아니라 Boolean 타입의 값도 반환할 수 있음
+    @DisplayName("remove(1)")
     void t09() {
         MyArrayList<String> list = new MyArrayList<>();
 
@@ -145,5 +145,32 @@ class MyArrayListTest {
 
         list.remove(1);
         assertThat(list.size()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("remove(0)")
+    void t10() {
+        MyArrayList<String> list = new MyArrayList<>();
+
+        list.add("방울");
+        list.add("토마토");
+
+        list.remove(0);
+
+        String str = list.get(0);
+        assertThat(str).isEqualTo(null);
+    }
+
+    @Test
+    @DisplayName("contains()")
+    void t11() {
+        MyArrayList<String > list = new MyArrayList<>();
+
+        IntStream.range(0,2)
+                        .forEach(index -> list.add("사과 %d".formatted(index)));
+
+        assertThat(list.contains("사과 0")).isEqualTo(true);
+        assertThat(list.contains("사과 1")).isEqualTo(true);
+        assertThat(list.contains("사과 2")).isEqualTo(false);
     }
 }

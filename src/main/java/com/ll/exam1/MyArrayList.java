@@ -58,6 +58,11 @@ public class MyArrayList<T> {                   //모든 타입의 리스트를 
     }
 
     public void remove(int i) {
+        data[i] = null;
         size--;
+    }
+
+    public boolean contains(T element) {
+        return indexOf(element) != -1;
     }
 }
