@@ -2,16 +2,23 @@ package com.ll.exam2;
 
 public class MyHashMap<K, V> {
     private int size = 0;
-    private final Object[] keys;
-    private final Object[] values;
+    private final Entry[] entries; // Entry 는 key 와 value 로 구성되어 있음
+
+    private static class Entry<K, V> {
+        K key;
+        V value;
+        public Entry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
 
     public MyHashMap() {
         this(3);
     }
 
     public MyHashMap(int arrayLength) {
-        keys = new Object[arrayLength];
-        values = new Object[arrayLength];
+        entries = new Entry[arrayLength];
     }
 
     public int size() {
@@ -19,8 +26,7 @@ public class MyHashMap<K, V> {
     }
 
     public V put(K key, V value) {  // map >> put을 했을 때 덮어쓰기가 되면 덮어씌워지기 이전 값을 반환한다.
-        keys[size] = key;
-        values[size] = value;
+        entries[size] = new Entry<>(key, value);
 
         size++;
         return null;
@@ -31,12 +37,12 @@ public class MyHashMap<K, V> {
 
         if (indexOfKey == -1) {return null;}
 
-        return (V) values[indexOfKey];
+        return (V) entries[indexOfKey].value;
     }
 
     private int indexOfKey(K key) {
         for (int i = 0; i < size; i++) {
-            if(key.equals(keys[i])) {
+            if(key.equals(entries[i].key)) {
                 return i;
             }
         }
