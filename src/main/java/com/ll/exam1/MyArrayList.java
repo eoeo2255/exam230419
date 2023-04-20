@@ -65,4 +65,20 @@ public class MyArrayList<T> {                   //모든 타입의 리스트를 
     public boolean contains(T element) {
         return indexOf(element) != -1;
     }
+
+    public boolean add(int index, T element) {
+        spaceCheck();
+        makeEmptySpace(index);
+
+        data[index] = element;
+
+        size++;
+        return true;
+    }
+
+    private void makeEmptySpace(int index) {
+        for (int i = size - 1; i >= index; i--) {
+            data[i + 1] = data[i];
+        }
+    }
 }

@@ -173,4 +173,21 @@ class MyArrayListTest {
         assertThat(list.contains("사과 1")).isEqualTo(true);
         assertThat(list.contains("사과 2")).isEqualTo(false);
     }
+
+    @Test
+    @DisplayName("addAt()")
+    void t12() {
+        MyArrayList<String > list = new MyArrayList<>();
+
+        list.add("방울");
+        list.add("토마토");
+        list.add(0,"냠냠");
+
+        assertThat(list.size()).isEqualTo(3);
+        assertThat(list.get(0)).isEqualTo("냠냠");
+        assertThat(list.get(1)).isEqualTo("방울");
+        assertThat(list.get(2)).isEqualTo("토마토");
+    }
+
+
 }
