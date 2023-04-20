@@ -109,4 +109,12 @@ public class MyHashMap<K, V> {
         return -1;
     }
 
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            entries[i] = null;
+        }
+
+        size = 0;
+    }
+
 }
