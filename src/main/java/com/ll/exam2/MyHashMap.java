@@ -4,8 +4,6 @@ public class MyHashMap<K, V> {
     private int size = 0;
     private Entry[] entries; // Entry 는 key 와 value 로 구성되어 있음
 
-
-
     private static class Entry<K, V> {
         K key;
         V value;
@@ -96,6 +94,19 @@ public class MyHashMap<K, V> {
         return old;
     }
 
+    public boolean containsKey(K key) {
+        return indexOfKey(key) != -1;
+    }
 
+    public boolean containsValue(V value) {
+        return indexOfValue(value) != -1;
+    }
+
+    private int indexOfValue(V value) {
+        for (int i = 0; i < size; i++) {
+            if (value.equals(entries[i].value)) return i;
+        }
+        return -1;
+    }
 
 }
