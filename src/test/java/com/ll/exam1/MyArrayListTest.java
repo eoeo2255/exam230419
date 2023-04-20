@@ -20,6 +20,7 @@ class MyArrayListTest {
 
         assertThat(list.size()).isEqualTo(2);
     }
+
     @Test
     @DisplayName("Size(4)")
     void t01_2() {
@@ -70,24 +71,24 @@ class MyArrayListTest {
     @Test
     @DisplayName("배열의 크기 자동 증가")
     void t04() {
-        MyArrayList<Object> list = new MyArrayList<>();
+        MyArrayList<String> list = new MyArrayList<>();
 
         int dataLength1 = ((Object[]) TestUt.getFieldValue(list, "data", null)).length;
 
-        // 딱 1번 넘칠만큼의 데이터를 넣는다.
+        // 데이터 사이즈+1 만큼의 데이터를 넣음, 배열 길이 초과로 이사가야 됨
         IntStream.range(0, dataLength1 + 1)
                 .forEach(index -> list.add("Element2 %d".formatted(index)));
 
-        int dataLength2 = ((String[]) TestUt.getFieldValue(list, "data", null)).length;
+        int dataLength2 = ((Object[]) TestUt.getFieldValue(list, "data", null)).length;
         assertThat(dataLength2).isGreaterThan(dataLength1);
     }
 
     @Test
     @DisplayName("MyArrayList 초기화 시 생성자 인자로 배열의 사이즈 지정")
     void t05() {
-        MyArrayList<Object> list = new MyArrayList<>(200);
+        MyArrayList<String> list = new MyArrayList<>(200);
 
-        int dataLength = ((Object[]) TestUt.getFieldValue(list, "data",null)).length;
+        int dataLength = ((Object[]) TestUt.getFieldValue(list, "data", null)).length;
 
         assertThat(dataLength).isEqualTo(200);
     }
@@ -108,7 +109,7 @@ class MyArrayListTest {
     }
 
     @Test
-    @DisplayName("add(true)")
+    @DisplayName("add(true)")   // String 뿐만 아니라 Boolean 타입도 받을 수 있음
     void t07() {
         MyArrayList<Boolean> list = new MyArrayList<>(200);
 
@@ -116,5 +117,20 @@ class MyArrayListTest {
         list.add(false);
 
         assertThat(list.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("get(1)")  // String 뿐만 아니라 Boolean 타입의 값도 반환할 수 있음
+    void t08() {
+        MyArrayList<Boolean> list = new MyArrayList<>();
+
+        list.add(true);
+        list.add(false);
+
+        boolean e0 = list.get(0);
+        boolean e1 = list.get(1);
+
+        assertThat(e0).isEqualTo(true);
+        assertThat(e1).isEqualTo(false);
     }
 }

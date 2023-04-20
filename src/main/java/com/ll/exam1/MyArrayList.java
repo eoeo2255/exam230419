@@ -1,22 +1,22 @@
 package com.ll.exam1;
 
-public class MyArrayList<T> {
-    private Object[] data;
-    int size =0;
+public class MyArrayList<T> {                   //모든 타입의 리스트를 만들기 위해 제네릭 사용
+    int size = 0;
+    private Object[] data;                      // 데이터를 받는 것은 제네릭의 형변환이 일어나기 전이기 때문에 오브젝트 타입으로 받음
 
-    public MyArrayList() {
+    public MyArrayList() {                      // 기본 생성자, 배열의 길이가 2
         this(2);
     }
 
-    public MyArrayList(int dataLength) {
+    public MyArrayList(int dataLength) {        // 데이터를 넣을 배열의 길이를 매개변수로 받는 생성자
         data = new Object[dataLength];
     }
 
     public int size() {
         return size;
-    }
+    }           // 배열의 길이 반환
 
-    public boolean add(Object element) {
+    public boolean add(T element) {             // 제네릭의 타입이 정해졌기 때문에 element 를 T 로 받음
         spaceCheck();
         data[size] = element;
         size++;
@@ -35,7 +35,7 @@ public class MyArrayList<T> {
     }
 
     private void makeNewData() {
-        Object[] newData = new String[data.length * 2];
+        Object[] newData = new Object[data.length * 2];
 
         for (int i = 0; i < data.length; i++) {
             newData[i] = data[i];
@@ -44,11 +44,11 @@ public class MyArrayList<T> {
         data = newData;
     }
 
-    public Object get(int i) {
-        return data[i];
+    public T get(int i) {                           // 제네릭의 타입이 정해졌기 때문에 element 를 T 로 받음
+        return (T) data[i];
     }
 
-    public int indexOf(Object element) {
+    public int indexOf(T element) {
         for (int i = 0; i < data.length; i++) {
             if (element.equals(data[i])) {
                 return i;
